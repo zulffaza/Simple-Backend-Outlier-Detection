@@ -32,35 +32,6 @@ public class AttributesHelper {
         return instance;
     }
 
-    public void calculateAttributesDistances(List<Attribute> attributes) {
-        List<Attribute> attributesCopy = new ArrayList<>(attributes);
-
-        attributes.forEach(attribute ->
-                calculateAttributeDistances(attribute, attributesCopy));
-    }
-
-    private void calculateAttributeDistances(Attribute attribute, List<Attribute> attributes) {
-        attributes.forEach(attributeCopy ->
-                calculateAttributeDistance(attribute, attributeCopy));
-    }
-
-    private void calculateAttributeDistance(Attribute attribute, Attribute attributeCopy) {
-        if (!attribute.isIdEquals(attributeCopy.getId())) {
-            AttributeDistance attributeDistance = createAttributeDistance(attribute, attributeCopy);
-            attribute.addAttributeDistance(attributeDistance);
-        }
-    }
-
-    private AttributeDistance createAttributeDistance(Attribute attribute, Attribute attributeCopy) {
-        Integer id = attributeCopy.getId();
-        Double distance = calculateDistance(attribute, attributeCopy);
-
-        return AttributeDistance.builder()
-                .id(id)
-                .distance(distance)
-                .build();
-    }
-
     public Double calculateDistance(Attribute attribute, Attribute attributeCopy) {
         List<Double> result = subtractAllAttributes(attribute, attributeCopy);
         Attribute attributeResult = Attribute.builder(result).build();

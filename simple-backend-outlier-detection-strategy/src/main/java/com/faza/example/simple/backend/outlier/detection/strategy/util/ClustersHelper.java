@@ -73,7 +73,7 @@ public class ClustersHelper {
     private void mergeNearestCluster(Cluster cluster, Integer nearestClusterId, List<Cluster> clusters) {
         Cluster nearestCluster = findCluster(nearestClusterId, clusters);
         nearestCluster.getAttributes()
-                .forEach(cluster::addPixel);
+                .forEach(cluster::addAttribute);
         clusters.remove(nearestCluster);
     }
 

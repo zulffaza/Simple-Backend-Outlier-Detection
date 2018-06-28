@@ -7,12 +7,12 @@
     <artifactId>simple-backend-outlier-detection</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
+        <module>simple-backend-outlier-detection-web-model</module>
         <module>simple-backend-outlier-detection-model</module>
         <module>simple-backend-outlier-detection-strategy-model</module>
         <module>simple-backend-outlier-detection-strategy</module>
         <module>simple-backend-outlier-detection-service-model</module>
         <module>simple-backend-outlier-detection-service</module>
-        <module>simple-backend-outlier-detection-web-model</module>
         <module>simple-backend-outlier-detection-web</module>
         <module>simple-backend-outlier-detection-application</module>
     </modules>

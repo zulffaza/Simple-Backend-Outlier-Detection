@@ -1,7 +1,7 @@
 package com.faza.example.simple.backend.outlier.detection.service.command.implementation;
 
 import com.faza.example.simple.backend.outlier.detection.model.Cluster;
-import com.faza.example.simple.backend.outlier.detection.service.command.Command;
+import com.faza.example.simple.backend.outlier.detection.service.command.ClusterCommand;
 import com.faza.example.simple.backend.outlier.detection.service.model.request.ClusterRequest;
 import com.faza.example.simple.backend.outlier.detection.service.model.response.ClusterResponse;
 import com.faza.example.simple.backend.outlier.detection.strategy.model.request.ClusterStrategyRequest;
@@ -18,7 +18,7 @@ import java.util.Optional;
  */
 
 @Service
-public class ClusterCommand implements Command<ClusterRequest, ClusterResponse> {
+public class ClusterCommandImpl implements ClusterCommand {
 
     @Override
     public Optional<ClusterResponse> execute(ClusterRequest clusterRequest) throws Exception {
