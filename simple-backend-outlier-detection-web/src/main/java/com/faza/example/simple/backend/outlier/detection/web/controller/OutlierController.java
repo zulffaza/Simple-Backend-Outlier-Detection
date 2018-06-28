@@ -1,13 +1,13 @@
 package com.faza.example.simple.backend.outlier.detection.web.controller;
 
 import com.faza.example.simple.backend.outlier.detection.service.command.executor.CommandExecutor;
-import com.faza.example.simple.backend.outlier.detection.service.command.implementation.ClusterBandCommandImpl;
-import com.faza.example.simple.backend.outlier.detection.service.model.request.ClusterCommandRequest;
+import com.faza.example.simple.backend.outlier.detection.service.command.implementation.OutlierDetectionCommandImpl;
+import com.faza.example.simple.backend.outlier.detection.service.model.request.OutlierDetectionCommandRequest;
 import com.faza.example.simple.backend.outlier.detection.web.helper.RequestHelper;
 import com.faza.example.simple.backend.outlier.detection.web.helper.ResponseHelper;
-import com.faza.example.simple.backend.outlier.detection.web.model.request.ClusterRequest;
+import com.faza.example.simple.backend.outlier.detection.web.model.request.OutlierDetectionRequest;
 import com.faza.example.simple.backend.outlier.detection.web.model.response.ApiResponse;
-import com.faza.example.simple.backend.outlier.detection.web.model.response.ClusterResponse;
+import com.faza.example.simple.backend.outlier.detection.web.model.response.OutlierDetectionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,10 +35,11 @@ public class OutlierController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ApiResponse<ClusterResponse> outlierDetection(@Valid ClusterRequest clusterRequest) throws Exception {
-        ClusterCommandRequest clusterCommandRequest = RequestHelper.createClusterCommandRequest(clusterRequest);
-        Optional<ClusterResponse> clusterResponse = commandExecutor.doExecute(ClusterBandCommandImpl.class,
-                clusterCommandRequest);
+    public ApiResponse<OutlierDetectionResponse> outlierDetection(@Valid OutlierDetectionRequest outlierDetectionRequest) throws Exception {
+        OutlierDetectionCommandRequest outlierDetectionCommandRequest = RequestHelper
+                .createOutlierDetectionCommandRequest(outlierDetectionRequest);
+        Optional<OutlierDetectionResponse> clusterResponse = commandExecutor.doExecute(OutlierDetectionCommandImpl.class,
+                outlierDetectionCommandRequest);
 
         return ResponseHelper.createResponse(
                 clusterResponse.orElse(null));

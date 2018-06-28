@@ -40,7 +40,7 @@ public class Cluster {
         this.attributes = clusterBuilder.attributes;
         this.clusterDistances = clusterBuilder.clusterDistances;
 
-        sortPixels();
+        sortAttributes();
         sortClusterDistances();
 
         buildCentroid();
@@ -85,14 +85,14 @@ public class Cluster {
 
     public void setAttributes(List<Attribute> attributes) {
         this.attributes = attributes;
-        sortPixels();
+        sortAttributes();
 
         buildCentroid();
     }
 
-    public void addPixel(Attribute attribute) {
+    public void addAttribute(Attribute attribute) {
         this.attributes.add(attribute);
-        sortPixels();
+        sortAttributes();
 
         buildCentroid();
     }
@@ -110,26 +110,26 @@ public class Cluster {
         if (this.needCentroid) {
             this.centroid = createInitialCentroid();
 
-            sumAllPixelsField();
-            dividePixelsWithPixelsSize();
+            sumAllAttributesField();
+            divideAttributesWithAttributesSize();
         }
     }
 
     private Attribute createInitialCentroid() {
-        List<Double> centroidPixels = createInitialPixels();
+        List<Double> centroidAttributes = createInitialAttributes();
 
-        return Attribute.builder(centroidPixels)
+        return Attribute.builder(centroidAttributes)
                 .build();
     }
 
-    private List<Double> createInitialPixels() {
-        Integer pixelSize = getPixelSize();
+    private List<Double> createInitialAttributes() {
+        Integer attributeSize = getAttributeSize();
 
         return new ArrayList<>(
-                Collections.nCopies(pixelSize, 0.00));
+                Collections.nCopies(attributeSize, 0.00));
     }
 
-    private Integer getPixelSize() {
+    private Integer getAttributeSize() {
         return this.attributes.stream()
                 .max(Comparator.comparingDouble(this::getBytesSize))
                 .map(this::getBytesSize)
@@ -137,37 +137,37 @@ public class Cluster {
     }
 
     private Integer getBytesSize(Attribute attribute) {
-        return attribute.getDatas().size();
+        return attribute.getData().size();
     }
 
-    private void sumAllPixelsField() {
-        this.attributes.forEach(this::sumCentroidPixels);
+    private void sumAllAttributesField() {
+        this.attributes.forEach(this::sumCentroidAttributes);
     }
 
-    private void sumCentroidPixels(Attribute attribute) {
-        for (Integer i = 0; i < attribute.getDatas().size(); i++)
-            sumCentroidPixel(attribute, i);
+    private void sumCentroidAttributes(Attribute attribute) {
+        for (Integer i = 0; i < attribute.getData().size(); i++)
+            sumCentroidAttribute(attribute, i);
     }
 
-    private void sumCentroidPixel(Attribute attribute, Integer index) {
-        Double newValue = this.centroid.getDatas().get(index) + attribute.getDatas().get(index);
-        this.centroid.getDatas().set(index, newValue);
+    private void sumCentroidAttribute(Attribute attribute, Integer index) {
+        Double newValue = this.centroid.getData().get(index) + attribute.getData().get(index);
+        this.centroid.getData().set(index, newValue);
     }
 
-    private void dividePixelsWithPixelsSize() {
-        Integer pixelsSize = this.attributes.size();
-        Integer centroidPixelsSize = this.centroid.getDatas().size();
+    private void divideAttributesWithAttributesSize() {
+        Integer attributesSize = this.attributes.size();
+        Integer centroidAttributesSize = this.centroid.getData().size();
 
-        for (Integer i = 0; i < centroidPixelsSize; i++)
-            dividePixelWithPixelsSize(pixelsSize, i);
+        for (Integer i = 0; i < centroidAttributesSize; i++)
+            divideAttributeWithAttributesSize(attributesSize, i);
     }
 
-    private void dividePixelWithPixelsSize(Integer pixelsSize, Integer index) {
-        Double newValue = this.centroid.getDatas().get(index) / pixelsSize;
-        this.centroid.getDatas().set(index, newValue);
+    private void divideAttributeWithAttributesSize(Integer attributesSize, Integer index) {
+        Double newValue = this.centroid.getData().get(index) / attributesSize;
+        this.centroid.getData().set(index, newValue);
     }
 
-    private void sortPixels() {
+    private void sortAttributes() {
         this.attributes.sort(
                 Comparator.comparingInt(Attribute::getId));
     }

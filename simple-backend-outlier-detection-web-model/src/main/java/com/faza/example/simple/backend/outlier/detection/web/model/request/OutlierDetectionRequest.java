@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClusterRequest {
+public class OutlierDetectionRequest {
 
     @NotNull
     private MultipartFile file;
@@ -27,5 +27,5 @@ public class ClusterRequest {
     private Integer numberOfCluster;
 
     @NotNull
-    private Integer multipleAverage;
+    private Double multipleAverage;
 }

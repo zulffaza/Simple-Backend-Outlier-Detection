@@ -1,6 +1,6 @@
 package com.faza.example.simple.backend.outlier.detection.service.model.request;
 
-import com.faza.example.simple.backend.outlier.detection.web.model.request.ClusterRequest;
+import com.faza.example.simple.backend.outlier.detection.web.model.request.OutlierDetectionRequest;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ClusterCommandRequest {
+public class OutlierDetectionCommandRequest {
 
-    private ClusterRequest clusterRequest;
+    private OutlierDetectionRequest outlierDetectionRequest;
 }

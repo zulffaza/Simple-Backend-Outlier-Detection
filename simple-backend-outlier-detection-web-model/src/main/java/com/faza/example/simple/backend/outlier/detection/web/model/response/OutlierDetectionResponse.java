@@ -14,7 +14,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class ClusterResponse {
+public class OutlierDetectionResponse {
 
     @JsonProperty("outliers")
     private List<Integer> outliers;
